@@ -1,30 +1,40 @@
-import { CSVBoxButton } from "@csvbox/react";
+import React from 'react';
+import { CSVBoxButton } from '@csvbox/react';
 
-export default function Imports() {
+
+type Data = {
+  row_success: number;
+  // Add other properties as needed
+};
+
+const Imports: React.FC = () => {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <h1>CSv Importer</h1>
-      <CSVBoxButton
+      <h1>CSV Importer</h1>
+      {/* <CSVBoxButton
         licenseKey="YOUR_LICENSE_KEY_HERE"
         user={{
           user_id: "default123"
         }}
-        onImport={(result, data) => {
-          if (result) {
+        onImport={(result: boolean, data: Data) => {
+          if(result){
             console.log("success");
             console.log(data.row_success + " rows uploaded");
             //custom code
-          } else {
+          }else{
             console.log("fail");
             //custom code
           }
-        }}
-        render={(launch, isLoading) => {
+        }} 
+        render={(launch: () => void, isLoading: boolean) => {
           return <button disabled={isLoading} onClick={launch}>Upload file</button>;
         }}
       >
         Import
-      </CSVBoxButton>
+      </CSVBoxButton> */}
     </main>
   );
 }
+
+export default Imports;
+
