@@ -9,7 +9,7 @@ export default function Exports() {
   const fetchData = useCallback(async () => {
      
     try {
-      const response = await fetch('https://localhost:3000/product-integration-app/export/products/cs-to-csv', {
+      const response = await fetch('https://fortywinks-uat.azure-api.net/product-integration-app/export/products/cs-to-csv', {
         method: 'GET',
         headers: {
           
