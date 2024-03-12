@@ -4,8 +4,8 @@ import { useState, useCallback, useEffect } from "react";
 export default function Exports() {
   const [apiResponse, setApiResponse] = useState<string | null>(null);
   const [responseClass, setResponseClass] = useState<string>('text-green-600');
-  const apiUrl=process.env.API_URL  || ''
-
+  const apiUrl='https://fortywinks-uat.azure-api.net/product-integration-app/export/products/cs-to-csv';
+  
   const fetchData = useCallback(async () => {
      
     try {
@@ -15,12 +15,13 @@ export default function Exports() {
           
         }
       });
-
+      console.log(response);
       if (!response.ok) {
         throw new Error(`Error fetching data: ${response.status}`);
         setResponseClass('text-red-600');
       }
       const data = await response.text();
+
       setApiResponse(data);
       console.log(data);
     } 
