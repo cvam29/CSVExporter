@@ -1,6 +1,38 @@
+'use client';  
 import Image from "next/image";
-
+import { useState, useCallback, useEffect } from "react";
 export default function Exports() {
+  const [apiResponse, setApiResponse] = useState<string | null>(null);
+  const [responseClass, setResponseClass] = useState<string>('text-green-600');
+  
+
+  const fetchData = useCallback(async () => {
+     
+    try {
+      const response = await fetch('https://localhost:3000/product-integration-app/export/products/cs-to-csv', {
+        method: 'GET',
+        headers: {
+          
+        }
+      });
+
+      if (!response.ok) {
+        throw new Error(`Error fetching data: ${response.status}`);
+        setResponseClass('text-red-600');
+      }
+      const data = await response.text();
+      setApiResponse(data);
+      console.log(data);
+    } 
+    catch (error) 
+    {
+      
+      console.error(error);
+      setResponseClass('text-red-600');
+      setApiResponse('An error occurred during export.');
+    }
+  }, []);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
 
@@ -20,13 +52,14 @@ export default function Exports() {
         />
         <button
           type="submit"
+          onClick={fetchData}
           className="flex-none rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
         >
           Export Products
         </button>
+    
       </div>
-     
-
+     {apiResponse && <p className={responseClass}>{apiResponse}</p>}
     </main>
   );
 }
