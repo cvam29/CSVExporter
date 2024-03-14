@@ -17,8 +17,8 @@ export default function Exports() {
       });
       console.log(response);
       if (!response.ok) {
-        throw new Error(`Error fetching data: ${response.status}`);
         setResponseClass('text-red-600');
+        throw new Error(`Error fetching data: ${response.status}`);
       }
       const data = await response.text();
 
