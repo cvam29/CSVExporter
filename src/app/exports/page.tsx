@@ -6,36 +6,38 @@ export default function Exports() {
   const [email, setEmail] = useState<string>(' ');
   const [emailError, setEmailError] = useState<string | null>(null);
   const apiLocal = 'http://localhost:7248/api/export/products/cs-to-csv';
-  const apiUrl = 'https://fortywinks-uat.azure-api.net/product-integration-app/export/products/cs-to-csv';
+  const apiUrl =  'https://fortywinks-prod.azure-api.net/product-integration-app/export/products/cs-to-csv';
+ 
 
   const fetchData = useCallback(async () => {
-    setApiResponse(null);
-    if (email && validateEmail(email)) {
+   
       try {
         const response = await fetch(apiUrl, {
+          mode: 'cors',
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify(email)
         });
-
-        if (!response.ok) {
-          setResponseClass('text-red-600');
-          throw new Error(`Error fetching data: ${response.status}`);
-        }
+        console.log(response)
+      if(response.ok)
+      {
         const data: string = await response.text();
+        console.log(data)
+        setResponseClass('text-green-600');
         setApiResponse(data);
-        
+        console.log(`api response: ${apiResponse}`);
+
+      }
       } catch (error) {
         console.error(error);
         setResponseClass('text-red-600');
         setApiResponse('An error occurred during export.');
       }
-    } else {
-      setEmailError('Please enter a valid email address');
-    }
+   
   }, [email, apiUrl]);
+
 
   const handleEmailChange = (event: ChangeEvent<HTMLInputElement>): void => {
     const newEmail = event.target.value;
