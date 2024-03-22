@@ -13,7 +13,6 @@ export default function Exports() {
    
       try {
         const response = await fetch(apiUrl, {
-          mode: 'cors',
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
