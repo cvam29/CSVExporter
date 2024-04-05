@@ -15,7 +15,9 @@ export default function Importer() {
             user={{
               user_id: process.env.CSV_BOX_USER_ID
             }}
-           
+            options={{
+              max_rows: 5000,
+            }}
             onImport={(result: boolean, data: any) => {
               if (result) {
                 console.log("success");
