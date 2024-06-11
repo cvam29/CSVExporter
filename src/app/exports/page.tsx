@@ -6,7 +6,7 @@ export default function Exports() {
   const [email, setEmail] = useState<string>(' ');
   const [emailError, setEmailError] = useState<string | null>(null);
   const apiLocal = 'http://localhost:7248/api/export/products/cs-to-csv';
-  const apiUrl =  'https://fortywinks-prod.azure-api.net/product-integration-app/export/products/cs-to-csv';
+  const apiUrl =  'https://product-integration-fortywinks-uat.azurewebsites.net/api/export/products/cs-to-csv';
  
 
   const fetchData = useCallback(async () => {
